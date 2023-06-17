@@ -5,6 +5,8 @@ import { NextFunction, Request, Response } from 'express';
 export class ValidateCustomerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     const { authorization } = req.headers;
+    console.log('ValidateCustomerMiddleware');
+
     if (!authorization)
       res.status(403).send({ error: 'No authentication token provided' });
 

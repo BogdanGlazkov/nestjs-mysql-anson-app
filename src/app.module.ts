@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import 'dotenv/config';
 import { CustomersModule } from './customers/customers.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 import entities from './typeorm';
 
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD } = process.env;
@@ -21,6 +22,7 @@ const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD } = process.env;
       entities,
       synchronize: true,
     }),
+    AuthModule,
   ],
   controllers: [],
   providers: [],

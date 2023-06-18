@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { SerializedUser, User } from 'src/types/User';
 import { CreateUserDto } from './dto/CreateUser.dto';
 import { User as UserEntity } from 'src/typeorm';
+import { encodePassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -27,8 +28,10 @@ export class UsersService {
     return this.users.find((user) => user.id === id);
   }
 
-  createUser(createUserDto: CreateUserDto) {
-    const newUser = this.userRepository.create(createUserDto);
+  async createUser(createUserDto: CreateUserDto) {
+    const password = await encodePassword(createUserDto.password);
+
+    const newUser = this.userRepository.create({ ...createUserDto, password });
     return this.userRepository.save(newUser);
   }
 

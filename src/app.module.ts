@@ -5,6 +5,7 @@ import 'dotenv/config';
 import { CustomersModule } from './customers/customers.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { PaymentsModule } from './payments/payments.module';
 import entities from './typeorm';
 
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD } = process.env;
@@ -25,6 +26,7 @@ const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD } = process.env;
     }),
     AuthModule,
     PassportModule.register({ session: true }),
+    PaymentsModule,
   ],
   controllers: [],
   providers: [],

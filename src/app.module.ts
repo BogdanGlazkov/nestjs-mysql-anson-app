@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PassportModule } from '@nestjs/passport';
 import 'dotenv/config';
 import { CustomersModule } from './customers/customers.module';
 import { UsersModule } from './users/users.module';
@@ -23,6 +24,7 @@ const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD } = process.env;
       synchronize: true,
     }),
     AuthModule,
+    PassportModule.register({ session: true }),
   ],
   controllers: [],
   providers: [],

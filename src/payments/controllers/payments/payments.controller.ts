@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Inject, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { CreatePaymentDto } from 'src/payments/dto/CreatePayment.dto';
-import { PaymentsService } from 'src/payments/services/payments/payments.service';
+import { CreatePaymentDto } from '../../dto/CreatePayment.dto';
+import { PaymentsService } from '../../services/payments/payments.service';
 
 @Controller('payments')
 export class PaymentsController {
@@ -21,7 +21,14 @@ export class PaymentsController {
   }
 
   @Post('create')
-  createPayment(@Body() createPaymentDto: CreatePaymentDto) {
-    this.paymentsService.createPayment();
+  async createPayment(@Body() createPaymentDto: CreatePaymentDto) {
+    try {
+      const response = await this.paymentsService.createPayment(
+        createPaymentDto,
+      );
+      return response;
+    } catch (error) {
+      return error;
+    }
   }
 }

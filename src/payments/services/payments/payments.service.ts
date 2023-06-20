@@ -8,10 +8,11 @@ export class PaymentsService {
     { email: 'stuy@test.com' },
     { email: 'arizona@test.com' },
   ];
-  createPayment(createPaymentDto: CreatePaymentDto) {
+
+  async createPayment(createPaymentDto: CreatePaymentDto) {
     const { email } = createPaymentDto;
     const user = this.users.find((user) => user.email === email);
-    if (user) return { id: 1, status: 'success' };
+    if (user) return { status: 'success' };
     else throw new BadRequestException();
   }
 }

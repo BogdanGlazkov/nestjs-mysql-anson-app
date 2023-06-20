@@ -8,7 +8,7 @@ import {
   Request as RequestNest,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { AuthenticatedGuard, LocalAuthGuard } from 'src/utils/LocalGuard';
+import { AuthenticatedGuard, LocalAuthGuard } from '../utils/LocalGuard';
 
 @Controller('auth')
 export class AuthController {

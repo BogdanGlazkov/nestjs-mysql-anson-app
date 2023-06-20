@@ -15,9 +15,9 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { SerializedUser } from 'src/types/User';
-import { UserNotFoundExcepton } from 'src/exceptions/UserNotFound.exception';
-import { HttpExceptionFilter } from 'src/filters/HttpException.filter';
+import { SerializedUser } from '../types/User';
+import { UserNotFoundExcepton } from '../exceptions/UserNotFound.exception';
+import { HttpExceptionFilter } from '../filters/HttpException.filter';
 import { CreateUserDto } from './dto/CreateUser.dto';
 
 @Controller('users')

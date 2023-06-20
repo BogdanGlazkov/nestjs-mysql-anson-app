@@ -12,8 +12,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { CustomersService } from './customers.service';
 import { Request, Response } from 'express';
+import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dtos/CreateCustomer.dto';
 
 @Controller('customers')

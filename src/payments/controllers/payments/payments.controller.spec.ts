@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Request, Response } from 'express';
 import { PaymentsController } from './payments.controller';
-import { PaymentsService } from 'src/payments/services/payments/payments.service';
+import { PaymentsService } from '../../services/payments/payments.service';
 import { BadRequestException } from '@nestjs/common';
 
 describe('PaymentsController', () => {
@@ -59,14 +59,6 @@ describe('PaymentsController', () => {
   });
 
   describe('createPayment', () => {
-    // it('should return a successful response', async () => {
-    //   const response = await controller.createPayment({
-    //     email: 'anson@test.com',
-    //     price: 100,
-    //   });
-    //   expect(response).toStrictEqual({ status: 'success' });
-    // });
-
     it('should throw an error', async () => {
       jest
         .spyOn(paymentsService, 'createPayment')
@@ -74,7 +66,7 @@ describe('PaymentsController', () => {
           throw new BadRequestException();
         });
       try {
-        const response = await controller.createPayment({
+        await controller.createPayment({
           email: 'anson@test.com',
           price: 100,
         });

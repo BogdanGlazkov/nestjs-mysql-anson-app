@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreatePaymentDto } from 'src/payments/dto/CreatePayment.dto';
+import { CreatePaymentDto } from '../../dto/CreatePayment.dto';
 
 @Injectable()
 export class PaymentsService {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCustomerDto } from './dtos/CreateCustomer.dto';
-import { Customer } from 'src/types/Customer';
+import { Customer } from '../types/Customer';
 
 @Injectable()
 export class CustomersService {

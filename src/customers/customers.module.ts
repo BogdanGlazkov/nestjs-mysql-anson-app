@@ -6,8 +6,8 @@ import {
 } from '@nestjs/common';
 import { CustomersController } from './customers.controller';
 import { CustomersService } from './customers.service';
-import { ValidateCustomerMiddleware } from 'src/middlewares/validate-customer.middleware';
-import { ValidateCustomerAccountMiddleware } from 'src/middlewares/validate-customer-account.middleware';
+import { ValidateCustomerMiddleware } from '../middlewares/validate-customer.middleware';
+import { ValidateCustomerAccountMiddleware } from '../middlewares/validate-customer-account.middleware';
 
 @Module({
   controllers: [CustomersController],

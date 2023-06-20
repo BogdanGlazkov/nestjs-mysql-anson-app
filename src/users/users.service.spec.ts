@@ -38,16 +38,49 @@ describe('UsersService', () => {
   });
 
   describe('createUser', () => {
-    it('should create a new user with encoded password', async () => {
-      jest
-        .spyOn(bcryptUtils, 'encodePassword')
-        .mockReturnValueOnce(Promise.resolve('hashed123'));
+    jest
+      .spyOn(bcryptUtils, 'encodePassword')
+      .mockReturnValue(Promise.resolve('hashed123'));
+    it('should encode password correctly', async () => {
       await service.createUser({
         username: 'Anson',
         email: 'anson@test.com',
-        password: '12345678',
+        password: '123',
       });
-      expect(bcryptUtils.encodePassword).toHaveBeenLastCalledWith('12345678');
+      expect(bcryptUtils.encodePassword).toHaveBeenLastCalledWith('123');
+    });
+
+    it('should call userRepository.create with correct params', async () => {
+      await service.createUser({
+        username: 'Anson',
+        email: 'anson@test.com',
+        password: '123',
+      });
+      expect(userRepository.create).toHaveBeenCalledWith({
+        username: 'Anson',
+        email: 'anson@test.com',
+        password: 'hashed123',
+      });
+    });
+
+    it('should call userRepository.save with correct params', async () => {
+      jest.spyOn(userRepository, 'create').mockReturnValueOnce({
+        id: 1,
+        username: 'Anson',
+        email: 'anson@test.com',
+        password: 'hashed123',
+      });
+      await service.createUser({
+        username: 'Anson',
+        email: 'anson@test.com',
+        password: '123',
+      });
+      expect(userRepository.save).toHaveBeenCalledWith({
+        id: 1,
+        username: 'Anson',
+        email: 'anson@test.com',
+        password: 'hashed123',
+      });
     });
   });
 });

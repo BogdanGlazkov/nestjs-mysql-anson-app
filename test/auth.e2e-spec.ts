@@ -14,6 +14,7 @@ describe('UsersController E2E Test', () => {
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
+      providers: [],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -26,27 +27,39 @@ describe('UsersController E2E Test', () => {
         resave: false,
         saveUninitialized: false,
         cookie: {
-          maxAge: 60000,
+          maxAge: 600000,
         },
         store: new TypeormStore().connect(sessionRepository),
       }),
     );
     app.use(passport.initialize());
     app.use(passport.session());
-
     await app.init();
   });
 
   describe('Authentication', () => {
     const URL = '/api/auth/login';
-    it('should login', () => {
-      return request(app.getHttpServer())
+    let cookie = '';
+
+    it('should login', (done) => {
+      request(app.getHttpServer())
         .post(URL)
         .send({
           username: 'Testuser',
           password: '12345678',
         })
-        .expect(201);
+        .expect(201)
+        .end((err, res) => {
+          cookie = res.headers['set-cookie'];
+          done();
+        });
+    });
+
+    it('should visit /api/users and return 200', async () => {
+      return request(app.getHttpServer())
+        .get('/api/users')
+        .set('Cookie', cookie)
+        .expect(200);
     });
   });
 
